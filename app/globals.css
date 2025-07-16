@@ -1,26 +1,266 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+@plugin "tailwind-scrollbar";
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1130px;
+  --breakpoint-2xl: 1520px;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* colors */
+  /*   --color-primary: #0d091a;
+  --color-secondary: #140e25;
+  --color-accent: #5810ff;
+  --color-accent-hover: #4a0bde;
+  --color-tertiary: #201837;
+  --color-tertiary-hover: #271f40; */
+  --color-primary: #09053e; /* Main background */
+  --color-secondary: #005282; /* Secondary background/elements */
+  --color-accent: #ff4756; /* Primary accent (buttons, highlights) */
+  --color-accent-hover: #70c239; /* Hover state for accent */
+  --color-tertiary: #ff533c; /* Warning/error or secondary accent */
+  --color-tertiary-hover: #39bc81; /* Hover state for tertiary */
+
+  /* fonts */
+  --font-primary: "Sometype Mono";
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-primary bg-primary text-white/95 leading-relaxed;
+}
+
+.h1 {
+  @apply text-[33px] md:text-[50px] xl:text-[52px] leading-[1] tracking-tight font-extrabold;
+}
+
+.h2 {
+  @apply text-[32px] md:text-[36px] xl:text-[38px] leading-[1.15] tracking-tight font-medium;
+}
+
+.h3 {
+  @apply text-[28px] md:text-[30px] xl:text-[32px] leading-[1.2] font-medium;
+}
+
+.h4 {
+  @apply text-[22px] md:text-[26px] leading-snug font-medium;
+}
+
+.container {
+  @apply px-[15px];
+}
+
+/* btns */
+
+.btn {
+  @apply flex items-center justify-center rounded-[5px] cursor-pointer transition-all font-medium h-[56px] border-2 border-transparent;
+}
+
+.btn:hover {
+  @apply transition-all duration-300 scale-105;
+}
+
+.btn:active {
+  transform: translateY(0.2rem);
+}
+
+.btn-sm {
+  @apply min-w-[168px] px-5 text-[15px] font-semibold;
+}
+
+.btn-lg {
+  @apply min-w-[200px] px-6;
+}
+
+/* btns color */
+.btn-accent {
+  @apply bg-accent;
+}
+.btn-accent:hover {
+  @apply bg-transparent border-2 border-accent text-accent font-bold;
+}
+
+.btn-tertiary {
+  @apply bg-tertiary;
+}
+.btn-tertiary:hover {
+  @apply bg-tertiary-hover text-secondary font-bold;
+}
+
+.btn-white {
+  @apply bg-white hover:bg-white/90 text-primary;
+}
+
+.mask {
+  -webkit-mask-size: 300px 200px;
+  mask-size: 300px 200px;
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    center top,
+    center bottom,
+    color-stop(0, rgba(0, 0, 0, 0)),
+    color-stop(1, rgba(0, 0, 0, 1))
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+/* swiper css */
+.swiper {
+  margin: 0 !important;
+}
+
+/* swiper bullets */
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal
+  .swiper-pagination-bullets
+  .swiper-pagination-bullet {
+  @apply bg-accent;
+}
+
+.custom-type-animation::after {
+  content: "|";
+  animation: blink 1.1s infinite step-start;
+  color: var(--color-tertiary-hover);
+  font-size: 26px;
+  font-weight: 100;
+  line-height: 1;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 370px) {
+  .custom-type-animation::after {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .custom-type-animation::after {
+    font-size: 35px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .custom-type-animation::after {
+    font-size: 42px;
+  }
+}
+
+.my-card {
+  border: solid 2px #4a0bde;
+  border-radius: 5px;
+  box-shadow: #4a0bde 1px 1px 1px, rgba(186, 249, 61, 0.915) 12px 12px,
+    #4a0bde 12px 12px 1px 2px;
+}
+
+/* Triple Glitch Effect */
+.triple-glitch-effect {
+  position: relative;
+  transition: all 0.1s ease;
+}
+
+.triple-glitch-effect::before,
+.triple-glitch-effect::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.1s ease;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.triple-glitch-effect::before {
+  color: #ff533c;
+  z-index: -1;
+}
+
+.triple-glitch-effect::after {
+  color: #82006a;
+  z-index: -2;
+}
+
+.triple-glitch-effect:hover::before {
+  opacity: 0.8;
+  transform: translate(-1.5px, -1.5px);
+  animation: glitch-copy1 0.35s ease;
+}
+
+.triple-glitch-effect:hover::after {
+  opacity: 0.6;
+  transform: translate(1.5px, 1.5px);
+  animation: glitch-copy2 0.35s ease;
+}
+
+.triple-glitch-effect:hover {
+  animation: glitch-main 0.35s ease;
+  color: #fffffff4;
+}
+
+/* Glitch Animations */
+@keyframes glitch-copy1 {
+  0%,
+  100% {
+    transform: translate(-1.5px, -1.5px);
+  }
+  25% {
+    transform: translate(-3px, -1px);
+  }
+  50% {
+    transform: translate(-1px, -3px);
+  }
+  75% {
+    transform: translate(-3px, -3px);
+  }
+}
+
+@keyframes glitch-copy2 {
+  0%,
+  100% {
+    transform: translate(1.5px, 1.5px);
+  }
+  25% {
+    transform: translate(3px, 1px);
+  }
+  50% {
+    transform: translate(1px, 3px);
+  }
+  75% {
+    transform: translate(3px, 3px);
+  }
+}
+
+@keyframes glitch-main {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1px, 1px);
+  }
+  50% {
+    transform: translate(1px, -1px);
+  }
+  75% {
+    transform: translate(-1px, -1px);
+  }
 }
