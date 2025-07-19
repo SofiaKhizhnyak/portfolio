@@ -9,8 +9,8 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { CiMenuFries } from "react-icons/ci";
-import { MdFileDownload } from "react-icons/md";
 import NavLinks from "./NavLinks";
+import { ViewCVButton } from "./ViewCVButton";
 import { DownloadCVButton } from "./DownloadCVButton";
 
 function Header() {
@@ -37,8 +37,12 @@ function Header() {
               </SheetHeader>
               <NavLinks containerStyles="flex flex-col gap-8 max-w-[100px]" />
               <div>
-                <DownloadCVButton />
-
+                <div className="lg:hidden">
+                  <ViewCVButton />
+                </div>
+                <div className="hidden lg:block">
+                  <DownloadCVButton />
+                </div>
                 <Socials
                   containerStyles="flex gap-4"
                   iconStyles="bg-accent text-white hover:bg-accent-hover transition w-[40px] h-[40px] text-[20px] flex items-center justify-center rounded-full cursor-pointer"

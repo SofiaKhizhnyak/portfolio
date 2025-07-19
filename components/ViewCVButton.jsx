@@ -1,9 +1,11 @@
 "use client";
-import { MdOpenInNew } from "react-icons/md";
+import Link from "next/link";
+import { MdFileDownload } from "react-icons/md";
+import { HiOutlineExternalLink } from "react-icons/hi";
 
 export function ViewCVButton() {
   return (
-    <a
+    <Link
       href="/assets/SofiaKhizhnyakResume.pdf"
       target="_blank"
       rel="noopener noreferrer"
@@ -11,8 +13,8 @@ export function ViewCVButton() {
     >
       <div className="flex items-center gap-x-3">
         <span>View CV</span>
-        <MdOpenInNew className="text-xl" />
+        <HiOutlineExternalLink className="text-2xl opacity-80" />
       </div>
-    </a>
+    </Link>
   );
 }

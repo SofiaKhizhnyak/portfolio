@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 import { MdFileDownload } from "react-icons/md";
+import { HiDownload } from "react-icons/hi";
+import { HiOutlineDownload } from "react-icons/hi";
+
 import { CheckIcon } from "./ui/check";
 import CountUp from "react-countup";
 
@@ -8,7 +11,6 @@ export function DownloadCVButton() {
   const [downloadState, setDownloadState] = useState("idle");
 
   const handleDownload = (e) => {
-    e.preventDefault();
     setDownloadState("downloading");
 
     const fileUrl = "/assets/SofiaKhizhnyakResume.pdf";
@@ -50,12 +52,13 @@ export function DownloadCVButton() {
       }`}
       onClick={handleDownload}
       aria-disabled={downloadState === "downloading"}
+      target="_blank"
     >
       <div className="flex items-center gap-x-3">
         {downloadState === "idle" && (
           <>
             <span>Download CV</span>
-            <MdFileDownload className="text-xl" />
+            <HiOutlineDownload className="text-2xl opacity-90" />
           </>
         )}
         {downloadState === "downloading" && (

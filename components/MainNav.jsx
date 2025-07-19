@@ -2,25 +2,35 @@
 import { useState, useEffect } from "react";
 import NavLinks from "./NavLinks";
 import Logo from "./Logo";
+
 import { DownloadCVButton } from "./DownloadCVButton";
 
 function MainNav() {
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [downloadState, setDownloadState] = useState("idle");
 
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024); // Adjust breakpoint as needed
-    };
+  const handleDownload = (e) => {
+    e.preventDefault();
+    setDownloadState("downloading");
 
-    // Initial check
-    checkScreenSize();
+    const fileUrl = "/assets/SofiaKhizhnyakResume.pdf";
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.setAttribute("download", "Sofia_Khizhnyak_CV.pdf");
 
-    // Add event listener
-    window.addEventListener("resize", checkScreenSize);
+    link.addEventListener("click", () => {
+      setTimeout(() => {
+        setDownloadState("success");
 
-    // Clean up
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
+        setTimeout(() => {
+          setDownloadState("idle");
+        }, 5000);
+      }, 1000);
+    });
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <nav className="w-full py-16">
