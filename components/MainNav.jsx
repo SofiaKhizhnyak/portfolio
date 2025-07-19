@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import NavLinks from "./NavLinks";
 import Logo from "./Logo";
 import { DownloadCVButton } from "./DownloadCVButton";
-import { ViewCVButton } from "./ViewCVButton";
 
 function MainNav() {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -28,7 +27,7 @@ function MainNav() {
       <div className="flex flex-col h-full items-center justify-between">
         <Logo />
         <NavLinks containerStyles="flex flex-col gap-6" />
-        {isLargeScreen ? <DownloadCVButton /> : <ViewCVButton />}
+        <DownloadCVButton />
       </div>
     </nav>
   );
